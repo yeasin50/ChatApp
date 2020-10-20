@@ -29,15 +29,20 @@ class ChatScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            // FIXME: done: core/no-app] No Firebase App '[DEFAULT]' has been created - call Firebase.initializeApp()
-            // Firestore.instance
-            //     .collection('chats/HuBfqAeaAlPLPc6qpou7/messages')
-            //     .snapshots()
-            //     .listen((data) {
-            //   // print(data.documents[0]['text']);
-            //   data.documents.forEach((element) {
-            //     print(element['text']);
+            Firestore.instance
+                .collection('chats/HuBfqAeaAlPLPc6qpou7/messages')
+                .add({'text': 'Added By Clicking'});
           }),
     );
   }
 }
+
+// FIXME:done:: formula
+// : core/no-app] No Firebase App '[DEFAULT]' has been created - call Firebase.initializeApp()
+// Firestore.instance
+//     .collection('chats/HuBfqAeaAlPLPc6qpou7/messages')
+//     .snapshots()
+//     .listen((data) {
+//   // print(data.documents[0]['text']);
+//   data.documents.forEach((element) {
+//     print(element['text']);
