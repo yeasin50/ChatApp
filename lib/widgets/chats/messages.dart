@@ -1,4 +1,6 @@
+import 'package:chatApp/widgets/chats/message_bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Messages extends StatelessWidget {
@@ -17,11 +19,22 @@ class Messages extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           var docs = snapShot.data.documents;
-          return ListView.builder(
+          final uId = FirebaseAuth.instance.currentUser;
+
+          return
+              //  FutureBuilder(
+              //FIXME ::: currentUser  not return future
+              // future: FirebaseAuth.instance.currentUser,
+              // builder: (ctx, snapShot) =>
+
+              ListView.builder(
             reverse: true,
             itemCount: docs.length,
-            itemBuilder: (ctx, i) => Text(
+            itemBuilder: (ctx, i) => MessagaeBubble(
               docs[i]['text'],
+              docs[i]['userId'] == uId ? true : false,
+              // this help to separate every msg and improve overllap msg 
+              key: ValueKey(docs[i].documentID),
             ),
           );
         });
