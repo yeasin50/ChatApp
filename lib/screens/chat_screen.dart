@@ -1,9 +1,7 @@
 import 'package:chatApp/widgets/chats/messages.dart';
 import 'package:chatApp/widgets/chats/new_message.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key key}) : super(key: key);
@@ -52,13 +50,6 @@ class ChatScreen extends StatelessWidget {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //     child: Icon(Icons.add),
-      //     onPressed: () {
-      //       FirebaseFirestore.instance
-      //           .collection('chats/HuBfqAeaAlPLPc6qpou7/messages')
-      //           .add({'text': 'Added By Clicking'});
-      //     }),
     );
   }
 }

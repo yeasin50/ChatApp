@@ -1,13 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MessagaeBubble extends StatelessWidget {
-  MessagaeBubble(this.message, this.isMe, {this.key});
+  MessagaeBubble(this.message, this.username, this.isMe, this.key);
 
   final bool isMe;
   final String message;
   final Key key;
+  final String username;
 
   Widget build(BuildContext context) {
+    print(isMe);
+
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
@@ -18,7 +22,7 @@ class MessagaeBubble extends StatelessWidget {
               topLeft: Radius.circular(12),
               topRight: Radius.circular(12),
               bottomLeft: isMe ? Radius.circular(12) : Radius.circular(0),
-              bottomRight: isMe ? Radius.circular(12) : Radius.circular(0),
+              bottomRight: isMe ? Radius.circular(0) : Radius.circular(12),
             ),
           ),
           width: 140,
@@ -30,11 +34,26 @@ class MessagaeBubble extends StatelessWidget {
             vertical: 6,
             horizontal: 4,
           ),
-          child: Text(
-            message,
-            style: TextStyle(
-              color: Theme.of(context).accentTextTheme.headline6.color,
-            ),
+          child: Column(
+            crossAxisAlignment:
+                isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            children: [
+              Text(
+                username,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                message,
+                style: TextStyle(
+                  color: isMe
+                      ? Colors.black
+                      : Theme.of(context).accentTextTheme.headline6.color,
+                ),
+                textAlign: isMe ? TextAlign.end : TextAlign.start,
+              ),
+            ],
           ),
         ),
       ],
