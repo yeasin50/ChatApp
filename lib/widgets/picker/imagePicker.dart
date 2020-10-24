@@ -3,7 +3,9 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class UserImagePicker extends StatefulWidget {
-  UserImagePicker({Key key}) : super(key: key);
+  final void Function(File pickedImg) imgPicFun;
+
+  UserImagePicker(this.imgPicFun);
 
   @override
   _UserImagePickerState createState() => _UserImagePickerState();
@@ -14,11 +16,16 @@ class _UserImagePickerState extends State<UserImagePicker> {
 
   void _pickImage() async {
     final picker = ImagePicker();
-    final pickedImage = await picker.getImage(source: ImageSource.gallery);
+    final pickedImage = await picker.getImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+      maxWidth: 150,
+    );
 
     setState(() {
       _pickedImage = File(pickedImage.path);
     });
+    widget.imgPicFun(File(pickedImage.path));
   }
 
   @override
