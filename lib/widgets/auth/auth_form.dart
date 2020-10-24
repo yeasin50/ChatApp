@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 class AuthForm extends StatefulWidget {
   AuthForm(this.submitFuntion, this.isloading);
   final bool isloading;
-  final void Function(
+  final void Function({
     String email,
     String password,
     String userName,
     bool isLogin,
     BuildContext ctx,
-  ) submitFuntion;
+  }) submitFuntion;
 
   @override
   _AuthFormState createState() => _AuthFormState();
@@ -34,11 +34,11 @@ class _AuthFormState extends State<AuthForm> {
 
       // sending value to auth
       widget.submitFuntion(
-        _userEmail.trim(),
-        _userName.trim(),
-        _userPassword.trim(),
-        _isLogin,
-        context,
+        email: _userEmail.trim(),
+        userName: _userName.trim(),
+        password: _userPassword.trim(),
+        isLogin: _isLogin,
+        ctx: context,
       );
     }
   }
@@ -78,8 +78,8 @@ class _AuthFormState extends State<AuthForm> {
                     TextFormField(
                       key: ValueKey('userName'),
                       validator: (value) {
-                        if (value.isEmpty || value.length < 6) {
-                          return 'must be 6 charecter long';
+                        if (value.isEmpty || value.length < 4) {
+                          return 'must be 4 charecter long';
                         }
                         return null;
                       },

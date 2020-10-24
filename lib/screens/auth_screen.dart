@@ -16,19 +16,21 @@ class _AuthScreenState extends State<AuthScreen> {
   final _auth = FirebaseAuth.instance;
   var _isLoading = false;
 
-  void _submitAuthForm(
+  void _submitAuthForm({
     String email,
     String password,
     String userName,
     bool isLogin,
     BuildContext ctx,
-  ) async {
+  }) async {
     UserCredential authResult;
+      print("ON LOgin " + email + " " + password+" ::");
     try {
       setState(() {
         _isLoading = true;
       });
       if (isLogin) {
+      
         authResult = await _auth.signInWithEmailAndPassword(
           email: email,
           password: password,
