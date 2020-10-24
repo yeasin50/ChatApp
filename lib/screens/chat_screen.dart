@@ -1,10 +1,13 @@
 import 'package:chatApp/widgets/chats/messages.dart';
 import 'package:chatApp/widgets/chats/new_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
+
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +34,28 @@ class ChatScreen extends StatelessWidget {
                     ),
                   ),
                   value: 'logout',
-                )
+                ),
+                DropdownMenuItem(
+                  child: Container(
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.exit_to_app),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text("Take Img"),
+                      ],
+                    ),
+                  ),
+                  value: 'tempimage',
+                ),
               ],
               onChanged: (itemIdentifier) {
                 if (itemIdentifier == 'logout') {
                   FirebaseAuth.instance.signOut();
+                }
+                if (itemIdentifier == "tempimage") {
+      
                 }
               }),
         ],
@@ -44,7 +64,7 @@ class ChatScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Expanded(
-              child:Messages(),
+              child: Messages(),
             ),
             NewMessage(),
           ],
@@ -63,7 +83,6 @@ class ChatScreen extends StatelessWidget {
 //   // print(data.documents[0]['text']);
 //   data.documents.forEach((element) {
 //     print(element['text']);
-
 
 // StreamBuilder(
 //           stream: FirebaseFirestore.instance
