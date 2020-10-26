@@ -12,12 +12,12 @@ class MessagaeBubble extends StatelessWidget {
 
   Widget build(BuildContext context) {
     print(isMe);
-
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Stack(children: [
           Container(
+            width: 180,
             decoration: BoxDecoration(
               color: isMe ? Colors.grey[300] : Theme.of(context).accentColor,
               borderRadius: BorderRadius.only(

@@ -1,13 +1,44 @@
-import 'package:chatApp/widgets/chats/messages.dart';
-import 'package:chatApp/widgets/chats/new_message.dart';
+import '../widgets/chats/messages.dart';
+import '../widgets/chats/new_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:flutter/material.dart';
 
-
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   const ChatScreen({Key key}) : super(key: key);
 
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  @override
+  void initState() {
+     super.initState();
+
+    //FOR ISO Permission ()> mainly
+    final fbm = FirebaseMessaging();
+    fbm.requestNotificationPermissions();
+    fbm.configure(
+      onMessage: (msg) {
+        print(msg);
+        return;
+      },
+      onLaunch: (message) {
+        print(message);
+        return;
+      },
+      onResume: (message) {
+        print(message);
+        return;
+      },
+    );
+    // to get deviceinOF
+    // fbm.getToken();
+    fbm.subscribeToTopic("chat");
+   
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +47,7 @@ class ChatScreen extends StatelessWidget {
         title: Text('Chats'),
         actions: <Widget>[
           DropdownButton(
+            underline: Container(),
               icon: Icon(
                 Icons.more_vert,
                 color: Theme.of(context).primaryIconTheme.color,
@@ -35,28 +67,13 @@ class ChatScreen extends StatelessWidget {
                   ),
                   value: 'logout',
                 ),
-                DropdownMenuItem(
-                  child: Container(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.exit_to_app),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text("Take Img"),
-                      ],
-                    ),
-                  ),
-                  value: 'tempimage',
-                ),
+        
               ],
               onChanged: (itemIdentifier) {
                 if (itemIdentifier == 'logout') {
                   FirebaseAuth.instance.signOut();
                 }
-                if (itemIdentifier == "tempimage") {
-      
-                }
+           
               }),
         ],
       ),

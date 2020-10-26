@@ -1,4 +1,4 @@
-import 'package:chatApp/widgets/picker/imagePicker.dart';
+import '../picker/imagePicker.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -74,6 +74,9 @@ class _AuthFormState extends State<AuthForm> {
                 children: <Widget>[
                   if (!_isLogin) UserImagePicker(_pickedImage),
                   TextFormField(
+                    autocorrect: false,
+                    textCapitalization: TextCapitalization.none,
+                    enableSuggestions: false,
                     key: ValueKey('email'),
                     validator: (value) {
                       if (value.isEmpty || !value.contains('@')) {
@@ -93,6 +96,9 @@ class _AuthFormState extends State<AuthForm> {
                   if (!_isLogin)
                     TextFormField(
                       key: ValueKey('userName'),
+                      autocorrect: true,
+                      textCapitalization: TextCapitalization.words,
+                      enableSuggestions: false,
                       validator: (value) {
                         if (value.isEmpty || value.length < 4) {
                           return 'must be 4 charecter long';
