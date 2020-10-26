@@ -50,7 +50,7 @@ class _AuthScreenState extends State<AuthScreen> {
             .ref()
             .child("user_image")
             .child(authResult.user.uid + ".jpg");
-       final StorageUploadTask uploadtask =  ref.putFile(userImage);
+        final StorageUploadTask uploadtask = ref.putFile(userImage);
         var url = await (await uploadtask.onComplete).ref.getDownloadURL();
 
         //storing userData
